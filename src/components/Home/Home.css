@@ -8,3 +8,10 @@ img{
 .heading{
     margin-top: -500px ;
 }
+
+.home{
+    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 90px;
+}

@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css'
+import ChefCard from './ChefCard/ChefCard';
 
 const Home = () => {
+    const [data , setData] = useState([])
+    const [loading, setLoading] = useState(true)
+    useEffect(()=> {
+        async function fetchData() {
+          try {
+            const response = await fetch('http://localhost:5000/chefdetails');
+            const jsonData = await response.json();
+            setData(jsonData);
+            setLoading(false);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        }
+    
+        fetchData();
+      }, [])
     return (
-        <div className=''>
+        <div className='' >
             <div className="bg-black p-3">
             <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner  " id='banner'>
@@ -29,6 +46,13 @@ const Home = () => {
             </div>
             
             </div>
+            <div className="home bg-black w-100 p-5">
+                {
+                        data.map(chefData=> <ChefCard key={chefData.id} chefData={chefData}></ChefCard>)
+                    }
+                
+                </div>
+            
         </div>
     );
 };
