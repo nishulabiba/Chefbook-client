@@ -26,7 +26,6 @@ const Nav = () => {
           </button>
           <ul className="dropdown-menu bg-white">
             <li><NavLink className="dropdown-item" href="#">Favorite Recipes</NavLink></li>
-            <li><NavLink className="dropdown-item" href="#">Regional Recipes</NavLink></li>
             <li><NavLink className="dropdown-item" href="#">Most Liked Recipes</NavLink></li>
             
           </ul>

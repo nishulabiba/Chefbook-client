@@ -6,7 +6,7 @@ const ChefCard = ({chefData}) => {
     return (
         <div className='  '>
             
-            <div className="card d-flex flex-column justify-content-center align-items-center text-center p-5 bg-body-secondary  " >
+            <div className="card d-flex flex-column justify-content-center align-items-center text-center p-3 bg-body-secondary  " >
             <img src={chefData.picture} className="card-img-top h-75" />
   
   <div className="card-body">

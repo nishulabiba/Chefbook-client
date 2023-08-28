@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import ChefCard from './ChefCard/ChefCard';
 
 const Home = () => {
@@ -46,12 +48,20 @@ const Home = () => {
             </div>
             
             </div>
-            <div className="home bg-black w-100 p-5">
+            {
+              loading?(
+                <div className="bg-black text-white spinner p-5  ">
+                  <FontAwesomeIcon className='me-1 w-100 fa-spin-pulse h6 p-5' icon={faSpinner}/>
+                </div>
+              ): (
+                <div className="home bg-black w-100 p-5">
                 {
                         data.map(chefData=> <ChefCard key={chefData.id} chefData={chefData}></ChefCard>)
                     }
                 
                 </div>
+              )
+            }
             
         </div>
     );

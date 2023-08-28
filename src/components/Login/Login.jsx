@@ -2,7 +2,7 @@ import React from 'react';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus} from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus, } from '@fortawesome/free-solid-svg-icons'
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from '../../firebase/firebase.config'
 
@@ -55,26 +55,27 @@ const Login = () => {
                     <div className="row mb-3">
                         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
                         <div className="col-sm-10">
-                        <input type="email" name='email' className="form-control" id="inputEmail3" required/>
+                        <input defaultValue="" type="email"  name='email' className="form-control" id="inputEmail3" required/>
                         </div>
                     </div>
                     <div className="row mb-3">
                         <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-10">
-                        <input type="password" name='password' className="form-control" id="inputPassword3" required/>
+                        <input defaultValue="" type="password" name='password'required className="form-control" id="inputPassword3" />
                         </div>
                     </div>
-                    <Link>Forgot password?</Link>
+                    <Link className=' text-decoration-none'>Forgot password?</Link>
                     <br></br>
                     <input className="btn btn-primary mt-3 mb-3" type="submit" value="Login" />
-                    <br/>
-                    <div className="d-flex flex-column ">
-                        
-                    <button onClick={handleGoogleSignin} className='btn px-0 align-text-start'><img src="google.svg" alt=""/> Google Sign-in</button>
-                    <button onClick={handleGithubSignin} className='btn'><img src="github.svg" alt="" /> Github Sign-in</button>
-                    <Link to='./register'><button className='btn ms-0'><FontAwesomeIcon className='me-1' icon={faUserPlus}/> Register Now</button></Link>
-                    </div>
+                    
+                    
                 </form>
+                <div className="d-flex flex-column justify-content-start ">
+                        
+                    <button onClick={handleGoogleSignin} className='ms-0 btn px-0 align-text-start'><img src="google.svg" alt=""/>  Google Sign-in</button>
+                    <button onClick={handleGithubSignin} className=' ms-0 btn'><img src="github.svg" alt="" />  Github Sign-in</button>
+                    <Link to='./register' className='btn '><FontAwesomeIcon className='me-1' icon={faUserPlus}/>  Register Now</Link>
+                    </div>
 
             </div>
         </div>
