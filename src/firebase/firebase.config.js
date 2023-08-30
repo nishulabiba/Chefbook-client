@@ -6,12 +6,13 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAe6cK29myVtrzqbuLhUOQkvuqYvU9g4dw",
-  authDomain: "chefbook-89446.firebaseapp.com",
-  projectId: "chefbook-89446",
-  storageBucket: "chefbook-89446.appspot.com",
-  messagingSenderId: "110538925234",
-  appId: "1:110538925234:web:71a8c8256bdfc0392555ab"
+  apiKey:            import.meta.env.VITE_apiKey,
+  authDomain:        import.meta.env.VITE_authDomain,
+  projectId:         import.meta.env.VITE_projectId,
+  storageBucket:     import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId:             import.meta.env. VITE_appId
+
 };
 
 // Initialize Firebase
