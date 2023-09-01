@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPlus, } from '@fortawesome/free-solid-svg-icons'
+import { faEye, faEyeSlash, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import app from '../../firebase/firebase.config'
+import { AuthContext } from '../../provider/Authprovider';
 
 const Login = () => {
+    const [error, setError] = useState(null)
+    const [see , setSee] = useState(false)
+
+    const {user, signIn} = useContext(AuthContext)
     // Initialize Firebase Authentication and get a reference to the service
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+   
     const gitProvider = new GithubAuthProvider();
 
     const handleGoogleSignin = () => {
@@ -23,6 +27,7 @@ const Login = () => {
     const errorCode = error.code;
     const errorMessage = error.message;
     console.log(errorMessage)
+    setError(errorMessage)
         })
     }
     const handleGithubSignin = () => {
@@ -36,6 +41,7 @@ const Login = () => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorMessage)
+            setError(errorMessage)
 
         })
     }
@@ -44,13 +50,32 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
+        signIn(email, password)
+         .then((result)=> {
+            const user = result.user;
+            console.log(user);
+         })
+         .catch((error)=>
+
+         {
+            console.log(error.message)
+         setError(error.message)
+         }
+         )
+
+
+        
         form.reset();
     }
     return (
         <div className='pb-5 d-flex flex-column bg-black justify-content-center align-items-center'>
             <h1 className='fs-2 m-5 text-white fst-italic'>Login Here !</h1>
+            {
+                    error?( <h1 className='text-center h6 text-danger pb-2'>You've entered wrong credentials !!!</h1> ):( <div className="
+                    "></div> )
+                }
             <div className="card p-lg-5 p-5 c1 bg-body-secondary">
+                
                 <form onSubmit={handleLogin}>
                     <div className="row mb-3">
                         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
@@ -61,7 +86,13 @@ const Login = () => {
                     <div className="row mb-3">
                         <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-10">
-                        <input defaultValue="" type="password" name='password'required className="form-control" id="inputPassword3" />
+                        {
+                            see?( <div className="d-flex justify-content-center align-items-center gap-1" >
+                                <input name='password'  type="text" className="form-control" id="inputPassword3" required/> <div onClick={()=> setSee(!see)} className="" ><FontAwesomeIcon  className=' me-1 text-black' icon={faEye}/></div> 
+                                </div>): (<div className="d-flex justify-content-center align-items-center gap-1">
+                                <input name='password'  type="password" className="form-control" id="inputPassword3" required/> <div onClick={()=> setSee(!see)} className="" ><FontAwesomeIcon  className=' me-1 text-black bg-white' icon={faEyeSlash}/></div> 
+                                </div> )
+                        } 
                         </div>
                     </div>
                     <Link className=' text-decoration-none'>Forgot password?</Link>

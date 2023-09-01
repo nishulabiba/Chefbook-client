@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../provider/Authprovider';
+import { Button } from 'bootstrap';
 
 const Nav = () => {
+  const {user, logOut} = useContext(AuthContext)
+
+  const handleLogout=()=>{
+
+    logOut();
+
+  }
     return (
         <div className=''>
           
@@ -11,7 +20,7 @@ const Nav = () => {
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
-    <div className="collapse navbar-collapse " id="navbarSupportedContent">
+    <div className="collapse navbar-collapse d-lg-flex  " id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex justify-content-center align-items-center gap-4">
         <li className="nav-item">
           <NavLink to='./'  className="nav-link btn btn-outline-secondary " aria-current="page" >Home</NavLink>
@@ -30,9 +39,16 @@ const Nav = () => {
             
           </ul>
         </li>
-        <div className='nav-item'> 
-        <NavLink to='./login' className='text-black btn btn-outline-secondary px-3 py-2  '>Login</NavLink></div>
+        
       </ul>
+
+      {
+          user?(<div className='nav-item'> 
+          <button onClick={handleLogout}  className='text-black btn btn-outline-secondary px-3 py-2 align-end  '>Log Out</button>
+          </div>): ( <div className='nav-item'> 
+          <NavLink to='./login' className='text-black btn btn-outline-secondary px-3 py-2  '>Login</NavLink>
+          </div> )
+        }
       
       
       
