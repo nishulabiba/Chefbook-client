@@ -3,8 +3,8 @@ import './Footer.css'
 
 const Footer = () => {
     return (
-        <div className=' f w-auto bg-black text-white '>
-            <div className="d-flex justify-content-around gap-2">
+        <div className='  w-auto bg-danger text-white '>
+            <div className="  d-flex justify-content-around gap-2">
             <div id='dd' className="text-left align-center ">
                 <h4 className='font-bold m-3 fst-italic '>Chef<span className='text-warning'>B</span>ook</h4>
                 <div className="ms-3 para">

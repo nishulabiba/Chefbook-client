@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './Login.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
@@ -10,6 +10,7 @@ import { AuthContext } from '../../provider/Authprovider';
 const Login = () => {
     const [error, setError] = useState(null)
     const [see , setSee] = useState(false)
+    const navigate = useNavigate()
 
     const {user, signIn} = useContext(AuthContext)
     // Initialize Firebase Authentication and get a reference to the service
@@ -53,7 +54,10 @@ const Login = () => {
         signIn(email, password)
          .then((result)=> {
             const user = result.user;
-            console.log(user);
+            console.log("current user",user);
+            navigate("/")
+            alert("Welcome to our site")
+            form.reset();
          })
          .catch((error)=>
 
@@ -65,7 +69,7 @@ const Login = () => {
 
 
         
-        form.reset();
+        
     }
     return (
         <div className='pb-5 d-flex flex-column bg-black justify-content-center align-items-center'>
@@ -80,7 +84,7 @@ const Login = () => {
                     <div className="row mb-3">
                         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
                         <div className="col-sm-10">
-                        <input defaultValue="" type="email"  name='email' className="form-control" id="inputEmail3" required/>
+                        <input placeholder='Enter email address' type="email"  name='email' className="form-control" id="inputEmail3" required/>
                         </div>
                     </div>
                     <div className="row mb-3">
@@ -88,9 +92,9 @@ const Login = () => {
                         <div className="col-sm-10">
                         {
                             see?( <div className="d-flex justify-content-center align-items-center gap-1" >
-                                <input name='password'  type="text" className="form-control" id="inputPassword3" required/> <div onClick={()=> setSee(!see)} className="" ><FontAwesomeIcon  className=' me-1 text-black' icon={faEye}/></div> 
+                                <input name='password' placeholder='Enter password'  type="text" className="form-control" id="inputPassword3" required/> <div onClick={()=> setSee(!see)} className="" ><FontAwesomeIcon  className=' me-1 text-black' icon={faEye}/></div> 
                                 </div>): (<div className="d-flex justify-content-center align-items-center gap-1">
-                                <input name='password'  type="password" className="form-control" id="inputPassword3" required/> <div onClick={()=> setSee(!see)} className="" ><FontAwesomeIcon  className=' me-1 text-black bg-white' icon={faEyeSlash}/></div> 
+                                <input name='password'  type="password" className="form-control" id="inputPassword3" required/> <div onClick={()=> setSee(!see)} className="" ><FontAwesomeIcon  className=' me-1 text-black ' icon={faEyeSlash}/></div> 
                                 </div> )
                         } 
                         </div>

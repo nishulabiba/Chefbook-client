@@ -50,8 +50,8 @@ const Home = () => {
             </div>
             {
               loading?(
-                <div className="bg-black text-white spinner p-5  ">
-                  <FontAwesomeIcon className='me-1 w-100 fa-spin-pulse h6 p-5' icon={faSpinner}/>
+                <div className="bg-black text-white spinner p-1 ">
+                  <FontAwesomeIcon className='me-1 w-100 fa-spin-pulse h6 p-1' icon={faSpinner}/>
                 </div>
               ): (
                 <div className="home bg-black w-100 p-5">
