@@ -57,7 +57,7 @@ const ViewDetails = () => {
 
            <div className="d-flex flex-lg-row flex-column gap-lg-5 gap-2 ">
            {
-                recipes?.map(item=> <RecipeCard recipe={item}></RecipeCard>)
+                recipes?.map(item=> <RecipeCard recipe={item} key={item.recipe_id}></RecipeCard>)
             }
            </div>
 
