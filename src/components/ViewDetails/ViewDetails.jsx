@@ -17,7 +17,6 @@ const ViewDetails = () => {
      
     }, [])
     
-    console.log(data);
 
     const {recipes, name, likes, picture, description, yearsOfExperience, numOfRecipes } = data;
 

@@ -23,7 +23,6 @@ const handleFavorite =(id)=>{
   if(!storedIds.includes(id)) {
     storedIds.push(id)
   }
-  console.log(storedIds);
 
   localStorage.setItem('selectedElementIds', JSON.stringify(storedIds));
   setHeart(!heart)

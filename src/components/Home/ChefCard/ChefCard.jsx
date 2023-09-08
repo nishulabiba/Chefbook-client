@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const ChefCard = ({chefData}) => {
   const {id} = chefData;
-  console.log(id);
+  
     return (
         <div className='  '>
             

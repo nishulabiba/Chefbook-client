@@ -29,16 +29,20 @@ const Nav = () => {
           <NavLink to="/blog" className="nav-link btn btn-outline-secondary" >Blog</NavLink>
         </li>
         
-        <li className="nav-item dropdown">
-          <button className="nav-link dropdown-toggle btn btn-outline-secondary" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            More
-          </button>
-          <ul className="dropdown-menu bg-white">
-            <li><NavLink  className="dropdown-item" >Favorite Recipes</NavLink></li>
-            <li><NavLink className="dropdown-item" >Most Liked Recipes</NavLink></li>
-            
-          </ul>
-        </li>
+       {
+        user?( <div className="">
+          <NavLink to="/favorite_recipes" className="nav-link btn btn-outline-secondary">Favorite Recipes</NavLink>
+        </div> ): ( <li className="nav-item dropdown">
+        <button className="nav-link dropdown-toggle btn btn-outline-secondary" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          More
+        </button>
+        <ul className="dropdown-menu">
+          <li><NavLink to="/favorite_recipes"  className="dropdown-item" >Favorite Recipes</NavLink></li>
+          <li><NavLink className="dropdown-item" >Most Liked Recipes</NavLink></li>
+          
+        </ul>
+      </li>)
+       }
         
       </ul>
 

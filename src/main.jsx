@@ -15,6 +15,7 @@ import Blog from './components/Blog/Blog.jsx';
 import AuthProvider from './provider/Authprovider.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import ViewDetails from './components/ViewDetails/ViewDetails.jsx';
+import FavoriteRecipes from './components/Favorite/FavoriteRecipes.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,12 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <ViewDetails></ViewDetails>
 
+        </PrivateRoute>
+      },
+      {
+        path: "/favorite_recipes" ,
+        element: <PrivateRoute>
+          <FavoriteRecipes></FavoriteRecipes>
         </PrivateRoute>
       }
     ]
