@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
@@ -12,15 +12,19 @@ import Home from './components/Home/Home.jsx';
 import Login from './components/Login/Login.jsx';
 import Register from './components/Register/Register.jsx';
 import Blog from './components/Blog/Blog.jsx';
-import AuthProvider from './provider/Authprovider.jsx';
+import AuthProvider, { AuthContext } from './provider/Authprovider.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import ViewDetails from './components/ViewDetails/ViewDetails.jsx';
 import Recipes from './components/Recipes/Recipes.jsx';
 import { Fade } from 'react-bootstrap';
 import Fav from './components/Fav/Fav.jsx';
+import Profile from './components/Profile/Profile.jsx';
+
 
 const router = createBrowserRouter([
+  
   {
+    
     path: "/",
     element: <Layout></Layout>,
     errorElement: <ErrorPage></ErrorPage>,
@@ -53,6 +57,13 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <Fav></Fav>
         </PrivateRoute>
+      },
+      {
+        path:"/profile",
+        element: <PrivateRoute>
+          <Profile></Profile>
+        </PrivateRoute>
+
       }
     ]
   },

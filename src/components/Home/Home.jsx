@@ -6,21 +6,21 @@ import ChefCard from './ChefCard/ChefCard';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { AuthContext } from '../../provider/Authprovider';
+import { ToastContainer } from 'react-toastify';
 
-const {user } = useContext(AuthContext);
+
 
 const Home = () => {
     const [data , setData] = useState([])
     const [loading, setLoading] = useState(true)
-    const notify = () => {
-      toast.success('This is a success toast message!', {
-        position: toast.POSITION.TOP_RIGHT,
-      })
-  }
+    const {user}= useContext(AuthContext)
+    
+   
  
     useEffect(()=>{
       AOS.init();
   },[])
+
     useEffect(()=> {
         async function fetchData() {
           try {
@@ -28,9 +28,8 @@ const Home = () => {
             const jsonData = await response.json();
             setData(jsonData);
             setLoading(false);
-            if(user){
-              notify();
-        }
+            
+            
 
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -38,14 +37,12 @@ const Home = () => {
         }
     
         fetchData();
-        if(user){
-
-        }
+        
       }, [])
     return (
+      
         <div className='' >
             <div className="bg-black p-3">
-            <ToastContainer/>
             <div id="carouselExampleAutoplaying" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner  " id='banner'>
                     <div className="carousel-item active">
@@ -88,6 +85,8 @@ const Home = () => {
                 </div>
               )
             }
+            
+          <ToastContainer/>
             
         </div>
     );

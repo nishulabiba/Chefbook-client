@@ -8,6 +8,7 @@ import app from '../../firebase/firebase.config'
 import { AuthContext } from '../../provider/Authprovider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Alert } from 'react-bootstrap';
 
 const Login = () => {
     const [error, setError] = useState(null)
@@ -72,7 +73,8 @@ const Login = () => {
             console.log("current user",user);
             
            if(user){
-            alert("Welcome to ChefBooks")
+             alert("Welcome to ChefBooks")
+            
            }
             
             

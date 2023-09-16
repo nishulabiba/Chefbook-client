@@ -61,11 +61,12 @@ const Nav = () => {
     {
           user?(<div className='nav-item'> 
           <div className="d-flex gap-5 justify-content-lg-center justify-content-between align-items-center">
-            <div className="d-flex flex-column justify-content-center align-items-center">
-              <img className='rounded-circle border-5 border-danger ' id="h" src={user.photoURL} alt="" />
+            <div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title={user.displayName} className="d-flex flex-column justify-content-center align-items-center">
+              <Link to = "./profile" ><img className='rounded-circle border-5 border-danger ' id="h" src={user.photoURL} alt="" /></Link>
               <small className='text-black-50 font-monospace'>{user.displayName}</small>
             </div>
-          <button onClick={handleLogout}  className='b text-black btn btn-outline-secondary px-3 py-2 align-end  '>Log Out</button>
+          
+          <button  onClick={handleLogout}  className='b text-black btn btn-outline-secondary px-3 py-2 align-end  '>Log Out</button>
           </div>
           </div>): ( <div className='nav-item'> 
           <NavLink to='./login' className='text-black btn btn-outline-secondary px-3 py-2  '>Login</NavLink>
