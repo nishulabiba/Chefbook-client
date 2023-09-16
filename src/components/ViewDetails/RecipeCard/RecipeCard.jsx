@@ -20,7 +20,7 @@ const handleFavorite =(id)=>{
   
   const storedIds = JSON.parse(localStorage.getItem('selectedElementIds')) || [];
 
-  if(!storedIds.includes(id)) {
+  if(!storedIds.includes(id)) { 
     storedIds.push(id)
   }
 

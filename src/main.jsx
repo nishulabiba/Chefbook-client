@@ -15,7 +15,9 @@ import Blog from './components/Blog/Blog.jsx';
 import AuthProvider from './provider/Authprovider.jsx';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import ViewDetails from './components/ViewDetails/ViewDetails.jsx';
-import FavoriteRecipes from './components/Favorite/FavoriteRecipes.jsx';
+import Recipes from './components/Recipes/Recipes.jsx';
+import { Fade } from 'react-bootstrap';
+import Fav from './components/Fav/Fav.jsx';
 
 const router = createBrowserRouter([
   {
@@ -43,13 +45,13 @@ const router = createBrowserRouter([
         path: '/:id',
         element: <PrivateRoute>
           <ViewDetails></ViewDetails>
-
         </PrivateRoute>
       },
+      
       {
-        path: "/favorite_recipes" ,
+        path: "/fav_recipe" ,
         element: <PrivateRoute>
-          <FavoriteRecipes></FavoriteRecipes>
+          <Fav></Fav>
         </PrivateRoute>
       }
     ]

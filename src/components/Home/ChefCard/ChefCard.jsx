@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./ChefCard.css"
 import { Link, NavLink } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const ChefCard = ({chefData}) => {
   const {id} = chefData;
+
+  useEffect(()=>{
+    AOS.init();
+},[])
+
   
     return (
-        <div className='  '>
+        <div data-aos="fade-left" data-aos-offset="150" data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-anchor-placement ="top-down" className='  '>
             
             <div className="card d-flex flex-column justify-content-center align-items-center text-center p-3 bg-body-secondary  " >
             <img src={chefData.picture} className="card-img-top h-75" />

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
-import './Login.css'
-import { Link, useNavigate } from 'react-router-dom';
+import "./Login.css"
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
@@ -10,15 +10,19 @@ import { AuthContext } from '../../provider/Authprovider';
 const Login = () => {
     const [error, setError] = useState(null)
     const [see , setSee] = useState(false)
+    const location = useLocation()
     const navigate = useNavigate()
+    const from = location.state?.from?.pathname || "/"
 
     const {user, signIn} = useContext(AuthContext)
     // Initialize Firebase Authentication and get a reference to the service
    
-    const gitProvider = new GithubAuthProvider();
+    
 
     const handleGoogleSignin = () => {
-        signInWithPopup(auth, provider)
+        const providerG = new GoogleAuthProvider();
+        const googleAuth = getAuth();
+        signInWithPopup(googleAuth, providerG)
         .then((result)=> {
             const user = result.user;
             console.log(user)
@@ -32,7 +36,11 @@ const Login = () => {
         })
     }
     const handleGithubSignin = () => {
-        signInWithPopup(auth, gitProvider)
+        const gitProvider = new GithubAuthProvider();
+        const gitAuth = getAuth();
+
+
+        signInWithPopup(gitAuth, gitProvider)
         .then((result) => {
             const user = result.user;
             console.log(user)
@@ -107,8 +115,8 @@ const Login = () => {
                 </form>
                 <div className="d-flex flex-column justify-content-start ">
                         
-                    <button onClick={handleGoogleSignin} className='ms-0 btn px-0 align-text-start'><img src="google.svg" alt=""/>  Google Sign-in</button>
-                    <button onClick={handleGithubSignin} className=' ms-0 btn'><img src="github.svg" alt="" />  Github Sign-in</button>
+                    <button onClick={handleGoogleSignin} className='ms-0 btn px-0 align-text-start'><img className="image" src="google.svg" alt=""/>  Google Sign-in</button>
+                    <button onClick={handleGithubSignin} className='ms-0 btn'><img className='image ' src="github.svg" alt="" />  Github Sign-in</button>
                     <Link to='./register' className='btn '><FontAwesomeIcon className='me-1' icon={faUserPlus}/>  Register Now</Link>
                     </div>
 

@@ -3,10 +3,15 @@ import './Home.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import ChefCard from './ChefCard/ChefCard';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Home = () => {
     const [data , setData] = useState([])
     const [loading, setLoading] = useState(true)
+    useEffect(()=>{
+      AOS.init();
+  },[])
     useEffect(()=> {
         async function fetchData() {
           try {
@@ -48,6 +53,10 @@ const Home = () => {
             </div>
             
             </div>
+            <div className="d-flex justify-content-center bg-black text-white  pt-5">
+            <h1 className='display-5 font-monospace' data-aos="zoom-out-right" data-aos-offset="200" data-aos-easing="ease-in-quad" data-aos-duration="800" >Here are some awesome pakistani chefs!!!!</h1> 
+            </div>
+            {/* add animation */}
             {
               loading?(
                 <div className="bg-black text-white spinner p-1 ">

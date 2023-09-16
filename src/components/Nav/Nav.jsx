@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/Authprovider';
 import { Button } from 'bootstrap';
 
 const Nav = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  
+  const from = location.state?.from?.pathname || "/"
   const {user, logOut} = useContext(AuthContext)
 
   const handleLogout=()=>{
 
     logOut();
+    navigate(from, {replace: true})
 
   }
     return (
@@ -30,14 +35,15 @@ const Nav = () => {
         </li>
         
        {
-        user?( <div className="">
-          <NavLink to="/favorite_recipes" className="nav-link btn btn-outline-secondary">Favorite Recipes</NavLink>
+        user?( <div className="d-flex">
+          
+          <Link to="/fav_recipe" className='nav-link btn btn-outline-secondary'>Favorites</Link>
         </div> ): ( <li className="nav-item dropdown">
         <button className="nav-link dropdown-toggle btn btn-outline-secondary" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           More
         </button>
         <ul className="dropdown-menu">
-          <li><NavLink to="/favorite_recipes"  className="dropdown-item" >Favorite Recipes</NavLink></li>
+          <li><NavLink to="/favoriteRecipes"  className="dropdown-item" >Favorite Recipes</NavLink></li>
           <li><NavLink className="dropdown-item" >Most Liked Recipes</NavLink></li>
           
         </ul>
