@@ -3,13 +3,16 @@ import "./Login.css"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash, faUserPlus } from '@fortawesome/free-solid-svg-icons'
-import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithCredential, signInWithPopup } from "firebase/auth";
 import app from '../../firebase/firebase.config'
 import { AuthContext } from '../../provider/Authprovider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [error, setError] = useState(null)
     const [see , setSee] = useState(false)
+    const [success, setSuccess] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || "/"
@@ -34,25 +37,29 @@ const Login = () => {
     console.log(errorMessage)
     setError(errorMessage)
         })
+        if(!error){
+            navigate(from, {replace: true})
+        }
     }
     const handleGithubSignin = () => {
+        const credential = GithubAuthProvider.credential(token)
         const gitProvider = new GithubAuthProvider();
         const gitAuth = getAuth();
-
-
-        signInWithPopup(gitAuth, gitProvider)
+        signInWithCredential(gitAuth, credential)
         .then((result) => {
             const user = result.user;
             console.log(user)
         })
         .catch((error) => {
-
-            const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorMessage)
             setError(errorMessage)
 
         })
+    if(!error){
+        navigate(from, {replace: true})
+    }
+        
     }
     const handleLogin = event => {
         event.preventDefault();
@@ -63,9 +70,12 @@ const Login = () => {
          .then((result)=> {
             const user = result.user;
             console.log("current user",user);
-            navigate("/")
-            alert("Welcome to our site")
-            form.reset();
+            
+           if(user){
+            alert("Welcome to ChefBooks")
+           }
+            
+            
          })
          .catch((error)=>
 
@@ -73,7 +83,12 @@ const Login = () => {
             console.log(error.message)
          setError(error.message)
          }
+
          )
+         if(!error){
+            navigate(from, {replace: true})
+        }
+        form.reset();
 
 
         
@@ -110,6 +125,7 @@ const Login = () => {
                     <Link className=' text-decoration-none'>Forgot password?</Link>
                     <br></br>
                     <input className="btn btn-primary mt-3 mb-3" type="submit" value="Login" />
+                    
                     
                     
                 </form>

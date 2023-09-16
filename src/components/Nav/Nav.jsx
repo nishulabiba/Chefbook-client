@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/Authprovider';
-import { Button } from 'bootstrap';
+import "./Nav.css"
 
 const Nav = () => {
   const navigate = useNavigate()
@@ -52,18 +52,25 @@ const Nav = () => {
         
       </ul>
 
-      {
-          user?(<div className='nav-item'> 
-          <button onClick={handleLogout}  className='text-black btn btn-outline-secondary px-3 py-2 align-end  '>Log Out</button>
-          </div>): ( <div className='nav-item'> 
-          <NavLink to='./login' className='text-black btn btn-outline-secondary px-3 py-2  '>Login</NavLink>
-          </div> )
-        }
+    
       
       
       
       
     </div>
+    {
+          user?(<div className='nav-item'> 
+          <div className="d-flex gap-5 justify-content-lg-center justify-content-between align-items-center">
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <img className='rounded-circle border-5 border-danger ' id="h" src={user.photoURL} alt="" />
+              <small className='text-black-50 font-monospace'>{user.displayName}</small>
+            </div>
+          <button onClick={handleLogout}  className='b text-black btn btn-outline-secondary px-3 py-2 align-end  '>Log Out</button>
+          </div>
+          </div>): ( <div className='nav-item'> 
+          <NavLink to='./login' className='text-black btn btn-outline-secondary px-3 py-2  '>Login</NavLink>
+          </div> )
+        }
   </div>
 </nav>
         </div>

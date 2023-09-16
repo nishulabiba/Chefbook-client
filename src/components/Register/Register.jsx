@@ -3,41 +3,62 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/Authprovider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeDropper, faEyeSlash, faEyedropper } from '@fortawesome/free-solid-svg-icons'
+import { getAuth, updateCurrentUser, updateProfile } from 'firebase/auth';
 
 const Register = () => {
-    const {user, createUser} = useContext( AuthContext)
+    const { createUser} = useContext( AuthContext)
     const [error, setError] = useState(null)
     const [see, setSee] = useState(false)
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
     const handleRegister = event => {
+        const auth = getAuth();
         event.preventDefault();
         const f = event.target; 
         const name = f.name.value;
+        const photoURL = f.url.value;
         const email =f.email.value;
+        console.log({name, photoURL});
         const password = f.password.value;
-        if(!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+        if( !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
             setError( "Password not valid!")
             alert("Password invalid !!! Give 8 characters")
             return ;
           }
-        const url = f.url.value;
         createUser( email, password)
         .then((result)=>{
           const user = result.user;
 
           console.log(user)
           
-          navigate('/')
-
-          
+          if(user){
+            updateProfile(auth.currentUser, {
+                displayName: name, 
+                photoURL: photoURL
+              })
+              .then((result) => {
+        
+                const updatedUser = result.user;
+                console.log("updated",
+                    updatedUser);
+                // Profile updated!
+                // ...
+              }).catch((error) => {
+                // An error occurred
+                // ...
+              });
+            navigate('/')
+          }
           })
         .catch(error=>{
             console.log(error) 
         
       })
 
+      
+     
 
-        console.log(name, url);
+
+        
         f.reset();
     }
 
