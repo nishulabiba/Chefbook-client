@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import RecipeCard from './RecipeCard/RecipeCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner, faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import LazyLoad from 'react-lazy-load';
 
 const ViewDetails = () => {
     const {id} = useParams();
@@ -31,7 +32,9 @@ const ViewDetails = () => {
             <div className=' d-flex flex-column m-5'>
             <div className="d-flex gap-5 justify-content-center align-items-center">
 
+                <LazyLoad width={800} threshold={.95}>
                 <img className='ms-5 w-lg-25 w-75 ' src={picture} alt="" />
+                </LazyLoad>
                 <div className="d-flex flex-column mt-5 mt-lg-0">
                     <h1>{name}</h1>
                     <p className='w-75  '>{description}</p>

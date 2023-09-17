@@ -68,7 +68,7 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         signIn(email, password)
-         .then((result)=> {
+        .then((result)=> {
             const user = result.user;
             console.log("current user",user);
             
@@ -79,17 +79,23 @@ const Login = () => {
             
             
          })
-         .catch((error)=>
+        .catch((error)=>
 
          {
             console.log(error.message)
          setError(error.message)
+         if(error){
+            alert(error)
+        }
+        else {
+
+            navigate(from, {replace: true})
+
+        }
          }
 
          )
-         if(!error){
-            navigate(from, {replace: true})
-        }
+        
         form.reset();
 
 
