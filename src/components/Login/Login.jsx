@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react';
 import "./Login.css"
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash, faUserPlus } from '@fortawesome/free-solid-svg-icons'
-import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithCredential, signInWithPopup } from "firebase/auth";
+import { faEye, faEyeSlash, faHandPointDown, faSadCry, faSadTear, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { GithubAuthProvider, GoogleAuthProvider, getAuth, sendPasswordResetEmail, signInWithCredential, signInWithPopup } from "firebase/auth";
 import app from '../../firebase/firebase.config'
 import { AuthContext } from '../../provider/Authprovider';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Alert } from 'react-bootstrap';
+import { FirebaseError } from 'firebase/app';
 
 const Login = () => {
     const [error, setError] = useState(null)
@@ -73,7 +74,8 @@ const Login = () => {
             console.log("current user",user);
             
            if(user){
-             alert("Welcome to ChefBooks")
+             toast.success("Welcome to ChefBooks")
+             navigate(from, {replace: true})
             
            }
             
@@ -85,12 +87,7 @@ const Login = () => {
             console.log(error.message)
          setError(error.message)
          if(error){
-            alert(error)
-        }
-        else {
-
-            navigate(from, {replace: true})
-
+            toast.success(`User Not Found!!!!`)
         }
          }
 
@@ -102,11 +99,15 @@ const Login = () => {
         
         
     }
+
+    
     return (
         <div className='pb-5 d-flex flex-column bg-black justify-content-center align-items-center'>
             <h1 className='fs-2 m-5 text-white fst-italic'>Login Here !</h1>
             {
-                    error?( <h1 className='text-center h6 text-danger pb-2'>You've entered wrong credentials !!!</h1> ):( <div className="
+                    error?( <h1 className='text-center h6 text-danger pb-2'>You've entered wrong credentials !!! Check your password again!  <span>   </span>
+                    <FontAwesomeIcon icon={faHandPointDown}/>
+                    </h1> ):( <div className="
                     "></div> )
                 }
             <div className="card p-lg-5 p-5 c1 bg-body-secondary">
@@ -130,9 +131,12 @@ const Login = () => {
                         } 
                         </div>
                     </div>
-                    <Link className=' text-decoration-none'>Forgot password?</Link>
+                    <Link to="/reset-password"  className='  p-0 text-decoration-none'>Forgot password?</Link>
+                       
+                                            
                     <br></br>
                     <input className="btn btn-primary mt-3 mb-3" type="submit" value="Login" />
+                    <ToastContainer/>
                     
                     
                     

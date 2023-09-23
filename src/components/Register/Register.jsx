@@ -4,6 +4,8 @@ import { AuthContext } from '../../provider/Authprovider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeDropper, faEyeSlash, faEyedropper } from '@fortawesome/free-solid-svg-icons'
 import { getAuth, updateCurrentUser, updateProfile } from 'firebase/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
     const { createUser} = useContext( AuthContext)
@@ -21,7 +23,7 @@ const Register = () => {
         const password = f.password.value;
         if( !/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
             setError( "Password not valid!")
-            alert("Password invalid !!! Give 8 characters")
+            toast.success("Password invalid !!! Give 8 characters")
             return ;
           }
         createUser( email, password)
@@ -50,7 +52,8 @@ const Register = () => {
           }
           })
         .catch(error=>{
-            console.log(error) 
+            console.log(error)
+            toast.success(`Please, Give a valid password`) 
         
       })
 
@@ -105,6 +108,7 @@ const Register = () => {
                     </div>
                     <br></br>
                     <button type="submit" className="btn btn-primary mt-3 mb-3">Register</button>
+                    <ToastContainer/>
                     <br/>
                 </form>
 

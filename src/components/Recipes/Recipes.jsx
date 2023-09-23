@@ -6,6 +6,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Recipes = ({item1}) => {
     const {cookingMethod} = item1
     const navigate = useNavigate();
@@ -33,6 +36,7 @@ const Recipes = ({item1}) => {
 
     const storedIds = JSON.parse(localStorage.getItem('selectedElementIds')) || []; 
     const removeFavorite=(id)=>{
+        toast.success(`${item1.title} is removed from favorites successfully!!!!`)
 
         const updated = storedIds.filter(item=> item!=id)
         localStorage.setItem('selectedElementIds', JSON.stringify(updated));
@@ -87,6 +91,7 @@ const Recipes = ({item1}) => {
                     <p className=' pt-2 text-black-50'> Remove Favorite</p>
                 <FontAwesomeIcon  className='p-0' icon={faHeartBroken}/>
                 </div>
+                <ToastContainer/>
                 
             </div>
             </div>

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../provider/Authprovider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faArrowCircleRight, faEdit, faRegistered } from '@fortawesome/free-solid-svg-icons';
 import { useForm } from "react-hook-form"
 import { getAuth, updateEmail, updatePassword, updateProfile } from 'firebase/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const {user} = useContext(AuthContext)
@@ -58,31 +58,29 @@ const Profile = () => {
                 <div className="">
                 <h2>{user.displayName}</h2>
                 <p>{user.email}</p>
+                <Link to="/reset-password" className=' text-decoration-none text-black-50'>Reset Password <FontAwesomeIcon icon={faArrowCircleRight}/></Link>
                 </div>
                 <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn p-0 h-25'><FontAwesomeIcon icon={faEdit}/> Edit</button>
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Profile </h1>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-      <form className='p-3 form d-flex flex-column gap-3' onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      
-      <div className="">
-        <small>Name</small>
-      <input className='form-control' defaultValue={user.displayName} {...register("displayName")} />
-      </div>
-      <div className="">
-        <small>PhotoUrl</small>
-      <input className='form-control' defaultValue={user.photoURL} {...register("photoURL", { required: true })} />
-      </div>
-       <div className="">
-        <small>phoneNumber</small>
-      <input className='form-control' type='number' defaultValue={user.phoneNumber} {...register("phoneNumber")} />
-      </div>
+                  <div className="modal-dialog">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Profile </h1>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div className="modal-body">
+                      <form className='p-3 form d-flex flex-column gap-3' onSubmit={handleSubmit(onSubmit)}>
+                      
+                      
+                      <div className="">
+                        <small>Name</small>
+                      <input className='form-control' defaultValue={user.displayName} {...register("displayName")} />
+                      </div>
+                      <div className="">
+                        <small>PhotoUrl</small>
+                      <input className='form-control' defaultValue={user.photoURL} {...register("photoURL", { required: true })} />
+                      </div>
+                      
 
       {/* include validation with required or other standard HTML validation rules */}
       

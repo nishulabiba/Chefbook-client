@@ -19,6 +19,7 @@ import Recipes from './components/Recipes/Recipes.jsx';
 import { Fade } from 'react-bootstrap';
 import Fav from './components/Fav/Fav.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import EmailVerification from './components/Login/EmailVerification.jsx';
 
 
 const router = createBrowserRouter([
@@ -64,6 +65,9 @@ const router = createBrowserRouter([
           <Profile></Profile>
         </PrivateRoute>
 
+      },{
+        path: "/reset-password" ,
+        element: <EmailVerification></EmailVerification>
       }
     ]
   },
