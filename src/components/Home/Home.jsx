@@ -7,6 +7,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { AuthContext } from '../../provider/Authprovider';
 import { ToastContainer } from 'react-toastify';
+import FeedBack from './FeedBack/FeedBack';
+import Reviews from './Reviews/Reviews';
 
 
 
@@ -87,6 +89,8 @@ const Home = () => {
             }
             
           <ToastContainer/>
+          <FeedBack></FeedBack>
+          <Reviews/>
             
         </div>
     );
