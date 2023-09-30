@@ -9,6 +9,7 @@ import { AuthContext } from '../../provider/Authprovider';
 import { ToastContainer } from 'react-toastify';
 import FeedBack from './FeedBack/FeedBack';
 import Reviews from './Reviews/Reviews';
+import About from './About/About';
 
 
 
@@ -91,6 +92,7 @@ const Home = () => {
           <ToastContainer/>
           <FeedBack></FeedBack>
           <Reviews/>
+          <About/>
             
         </div>
     );
