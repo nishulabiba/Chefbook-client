@@ -20,6 +20,7 @@ import { Fade } from 'react-bootstrap';
 import Fav from './components/Fav/Fav.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import EmailVerification from './components/Login/EmailVerification.jsx';
+import AboutUs from './components/Home/About/AboutUs.jsx';
 
 
 const router = createBrowserRouter([
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
+              element: <Home></Home>                 
       },
       {
         path: "/login",
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
       },{
         path: "/reset-password" ,
         element: <EmailVerification></EmailVerification>
+      },
+      {
+        path: "/about",
+        element: <AboutUs></AboutUs>
       }
     ]
   },
