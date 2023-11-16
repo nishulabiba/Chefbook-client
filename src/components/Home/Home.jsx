@@ -27,7 +27,7 @@ const Home = () => {
     useEffect(()=> {
         async function fetchData() {
           try {
-            const response = await fetch('http://localhost:5000/chefdetails');
+            const response = await fetch('https://chefserver-green.vercel.app/chefdetails');
             const jsonData = await response.json();
             setData(jsonData);
             setLoading(false);

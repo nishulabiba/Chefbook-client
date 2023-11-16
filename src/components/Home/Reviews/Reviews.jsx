@@ -7,7 +7,7 @@ const Reviews = () => {
     useEffect(()=> {
         async function fetchData() {
             try {
-              const response = await fetch('http://localhost:5000/reviews');
+              const response = await fetch('https://chefserver-green.vercel.app/reviews');
               const jsonData = await response.json();
               setReviews(jsonData)
     

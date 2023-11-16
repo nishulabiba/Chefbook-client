@@ -13,7 +13,7 @@ const Fav = () => {
 useEffect(()=>{
     const dataLoader = async () =>{
 
-        const loadData = await fetch("http://localhost:5000/chefdetails")
+        const loadData = await fetch("https://chefserver-green.vercel.app/chefdetails")
         const data = await loadData.json()
         setData(data)
 

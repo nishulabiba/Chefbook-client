@@ -1,14 +1,15 @@
 import { faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../../provider/Authprovider';
 
 const EmailVerification = () => {
-    const [err, setErr] = useState(null)
+    const [err, setErr] = useState(false)
     const {user} = useContext(AuthContext)
 
+    
     const handleResetPass=(e)=>{
         e.preventDefault();
         const form = e.target;
@@ -30,7 +31,7 @@ const EmailVerification = () => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
                     console.log(errorMessage);
-                    setErr(errorMessage)
+                    setErr(true)
                     if(error){
                         toast.error("Sorry!! We couldn't find your account.")
                     }
@@ -58,7 +59,7 @@ const EmailVerification = () => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(errorMessage);
-            setErr(errorMessage)
+            setErr(true)
             if(error){
                 toast.error("Sorry!! We couldn't find your account.")
             }
@@ -78,7 +79,7 @@ const EmailVerification = () => {
                 }
                 {
                     user?(
-                        <input value={user.email} className='form-control mt-2' type="email" name="email" id="" />
+                        <input defaultValue={user?.email} className='form-control mt-2' type="email" name="email" id="" />
                     ):(
                         <input placeholder='Enter your email address' className='form-control mt-2' type="email" name="email" id="" />
                     )

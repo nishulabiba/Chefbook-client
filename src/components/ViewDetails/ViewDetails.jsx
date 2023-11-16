@@ -11,7 +11,7 @@ const ViewDetails = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(()=> {
-        fetch(`http://localhost:5000/chefdetails/${id}`)
+        fetch(`https://chefserver-green.vercel.app/chefdetails/${id}`)
         .then(res=>res.json())
         .then(data=> setData(data))
         setLoading(false)
